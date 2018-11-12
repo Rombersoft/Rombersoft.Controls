@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3AEA7C2B-D4DF-40F8-94E1-CB1C4334C54B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Rombersoft.Controls</RootNamespace>
+    <AssemblyName>XNA.Controls</AssemblyName>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+    <AssemblyName>Rombersoft.Controls</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Rombersoft.Controls</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\..\..\..\..\usr\lib\mono\xbuild\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\..\..\..\..\usr\lib\mono\xbuild\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\ButtonMenu.cs" />
+    <Compile Include="Controls\ButtonRound.cs" />
+    <Compile Include="Controls\CheckBox.cs" />
+    <Compile Include="Controls\Container.cs" />
+    <Compile Include="Controls\Control.cs" />
+    <Compile Include="Controls\Display.cs" />
+    <Compile Include="Controls\Item.cs" />
+    <Compile Include="Controls\Label.cs" />
+    <Compile Include="Controls\MessageBox.cs" />
+    <Compile Include="Controls\Numpad.cs" />
+    <Compile Include="Controls\Panel.cs" />
+    <Compile Include="Controls\Plate.cs" />
+    <Compile Include="Controls\Popup.cs" />
+    <Compile Include="Controls\Preloader.cs" />
+    <Compile Include="Controls\ProgressBarLinear.cs" />
+    <Compile Include="Controls\ProgressBarRadial.cs" />
+    <Compile Include="Controls\ScrollBar.cs" />
+    <Compile Include="Controls\TextArea.cs" />
+    <Compile Include="Controls\TextBox.cs" />
+    <Compile Include="GraphicInstance.cs" />
+    <Compile Include="InputManager.cs" />
+    <Compile Include="TextureCreator.cs" />
+    <Compile Include="MyMouseState.cs" />
+    <Compile Include="Controls\Spin.cs" />
+    <Compile Include="Controls\Picture.cs" />
+    <Compile Include="Controls\Keyboard.cs" />
+    <Compile Include="Controls\ListBox.cs" />
+    <Compile Include="ControlResources.cs" />
+    <Compile Include="Controls\KeyButton.cs" />
+    <Compile Include="Controls\Image.cs" />
+    <Compile Include="Controls\TextAlign.cs" />
+    <Compile Include="ITextEditor.cs" />
+    <Compile Include="Controls\Slider.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
+</Project>
