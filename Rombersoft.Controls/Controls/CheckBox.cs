@@ -10,21 +10,21 @@ namespace Rombersoft.Controls
 {
     public class CheckBox:Control
     {
-        private string _text;
-        private Color _textColor, _controlColor;
-        private Rectangle _rectSourceContainer, _rectSourcePoint, _rectSourceGlass, _rectDestContainer, _rectDestPoint;
-        private Vector2 _vectorDestText;
-        private bool _isPressed = false;
-        public bool Checked, WithGlass;
-        private Action _action;
-        private float _scale;
+        string _text;
+        float _scale;
         int _widthAnimation;
+        Rectangle _rectSourceContainer, _rectSourcePoint, _rectSourceGlass, _rectDestContainer, _rectDestPoint;
+        Vector2 _vectorDestText;
+        bool _isPressed = false;
+        public Color TextColor, ControlColor;
+        public bool Checked, WithGlass;
+        public event Action<Control> OnCheckedChanged;
 
-        public CheckBox(int x, int y, SpriteFont font, Color controlColor, Action action)
+        public CheckBox(int x, int y, SpriteFont font)
         {
             _text = string.Empty;
             Font = font;
-            _controlColor = controlColor;
+            ControlColor = TextColor = ControlResources.DefaultColor;
             int size = (int)Font.MeasureString("A").Y;
             _scale =  size / 80f;
             _rectSourceContainer = ControlResources.AtlasRegions["CheckBoxContainer"];
@@ -33,15 +33,13 @@ namespace Rombersoft.Controls
             _rectDestContainer = new Rectangle(x, y, size, size);
             _rectDestPoint = new Rectangle(x + (int)(10 * _scale), y + (int)(18 * _scale), (int)(_rectSourcePoint.Width * _scale), (int)(_rectSourcePoint.Height * _scale));
             _vectorDestText = new Vector2(x + size + (int)(size * 0.3) , y);
-            _action = action;
             Rect = new Rectangle(x, y, size, size);
             Checked = WithGlass = false;
         }
 
-        public void Text(string text, Color color)
+        public void Text(string text)
         {
             _text = text;
-            _textColor = color;
             Rect = new Rectangle(_rectDestContainer.X, _rectDestContainer.Y, _rectDestContainer.Width + (int)(_rectDestContainer.Width * 0.3 + Font.MeasureString(_text).X),
                                  _rectDestContainer.Width);
         }
@@ -53,24 +51,24 @@ namespace Rombersoft.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ControlResources.Atlas, _rectDestContainer, _rectSourceContainer, _controlColor);
+            spriteBatch.Draw(ControlResources.Atlas, _rectDestContainer, _rectSourceContainer, ControlColor);
             if (Checked)
             {
                 if (_widthAnimation < _rectSourcePoint.Width)
                 {
                     spriteBatch.Draw(ControlResources.Atlas, new Rectangle(_rectDestPoint.X, _rectDestPoint.Y, (int)(_widthAnimation * _scale), _rectDestPoint.Height), 
-                                     new Rectangle(_rectSourcePoint.X, _rectSourcePoint.Y, _widthAnimation, _rectSourcePoint.Height), _controlColor);
+                                     new Rectangle(_rectSourcePoint.X, _rectSourcePoint.Y, _widthAnimation, _rectSourcePoint.Height), ControlColor);
                     _widthAnimation += 4;
                 }
-                else spriteBatch.Draw(ControlResources.Atlas, _rectDestPoint, _rectSourcePoint, _controlColor);
+                else spriteBatch.Draw(ControlResources.Atlas, _rectDestPoint, _rectSourcePoint, ControlColor);
             }
             else if (_widthAnimation > 0)
             {
                 spriteBatch.Draw(ControlResources.Atlas, new Rectangle(_rectDestPoint.X, _rectDestPoint.Y, (int)(_widthAnimation * _scale), _rectDestPoint.Height),
-                                 new Rectangle(_rectSourcePoint.X, _rectSourcePoint.Y, _widthAnimation, _rectSourcePoint.Height), _controlColor);
+                                 new Rectangle(_rectSourcePoint.X, _rectSourcePoint.Y, _widthAnimation, _rectSourcePoint.Height), ControlColor);
                 _widthAnimation -= 4;
             }
-            spriteBatch.DrawString(Font, _text, _vectorDestText, _textColor);
+            spriteBatch.DrawString(Font, _text, _vectorDestText, TextColor);
             if (!Enabled)
             {
                 spriteBatch.Draw(ControlResources.Atlas, _rectDestContainer, _rectSourceContainer, ControlResources.DisabledColor);
@@ -102,7 +100,7 @@ namespace Rombersoft.Controls
                         _widthAnimation = 0;
                     }
                     _isPressed = false;
-                    if(_action != null) _action.Invoke();
+                    if (OnCheckedChanged != null) OnCheckedChanged(this);
                 }
                 return true;
             }
